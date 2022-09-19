@@ -17,7 +17,7 @@ B = sqrt(b)
 # ２）小文字と大文字は区別される
 # ３）空白記号はつかわない
 # 無効なオブジェクト名
-#   123Base 
+#   123Base
 #   base 123
 #   Base-123
 #   Base123&
@@ -28,7 +28,7 @@ B = sqrt(b)
 #   Base_123
 #   Base.123
 
-# R の関数は 関数名() 
+# R の関数は 関数名()
 a = c(1, 2, 3, 4, 5)
 a
 # 平均値の関数
@@ -64,9 +64,9 @@ factor(b) # あいうえお・アルファベット順
 
 factor(b, levels = c("dog", "rabbit", "cat")) # 因子のレベル順を指定する
 
-B = factor(b, 
-       levels = c("dog", "rabbit", "cat"),
-       labels = c("犬", "うさぎ", "猫"))
+B = factor(b,
+           levels = c("dog", "rabbit", "cat"),
+           labels = c("犬", "うさぎ", "猫"))
 
 class(B) # factor
 
@@ -95,7 +95,7 @@ median(siblings)
 
 sdev = sd(siblings)
 n = length(siblings)
-sdev / sqrt(n - 1) 
+sdev / sqrt(n - 1)
 
 # 自作関数
 
@@ -103,32 +103,74 @@ se = function(x) {
   sdev = sd(x)
   n = length(x)
   sdev / sqrt(n - 1)
+  # sdev / sqrt(n)
 }
-
-se
 
 se(siblings)
 
 
+university = c(
+  "長崎大学",
+  "北海道大学",
+  "近畿大学",
+  "長崎大学",
+  "近畿大学",
+  "北海道大学",
+  "長崎大学",
+  "近畿大学",
+  "長崎大学",
+  "鹿児島大学",
+  "奈良女子大学",
+  "帯広畜産大学",
+  "近畿大学",
+  "長崎大学",
+  "北海道大学",
+  "帯広畜産大学",
+  "東京海洋大学",
+  "筑波大学",
+  "長崎大学",
+  "近畿大学",
+  "長崎大学",
+  "長崎大学",
+  "北海道大学"
+)
+
+unitab = table(university)
+class(unitab)
+unitab
+
+# データフレーム
+unitab = as.data.frame(unitab)
+class(unitab)
+
+# データフレームの要素の抽出
+
+unitab$university
+unitab$Freq
+
+unitab[["university"]]
+unitab[["Freq"]]
+
+unitab_names = names(unitab)
+unitab_names
+
+## ベクトルの要素を抽出する
+unitab_names[1]
+unitab_names[2]
+
+unitab[[unitab_names[1]]]
+
+a = unitab_names[1]
+a
+unitab[[a]]
+
+b = unitab_names[2]
+b
+unitab[[b]]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+barplot(height = unitab$Freq,
+        names.arg = unitab$university)
 
 
 
