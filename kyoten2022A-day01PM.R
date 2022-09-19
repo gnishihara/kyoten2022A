@@ -71,5 +71,71 @@ B = factor(b,
 class(B) # factor
 
 
+#####################################
+# 14:55 まで休憩
+# チャットの google form にいって、データを入れてください。
+#####################################
+
+
+siblings = c(3, 1, 1, 2, 1, 1, 2,
+             1, 3, 1, 1, 0, 3, 2,
+             1, 2, 1, 0, 3, 0, 1,
+             1, 1, 0)
+siblings
+
+length(siblings) #　ベクトルの長さ
+
+# 平均値、標準偏差、標準誤差、中央地
+mean(siblings)
+sd(siblings)
+median(siblings)
+
+# 標準誤差の求め方
+# standard deviation / sqrt(n - 1)
+
+sdev = sd(siblings)
+n = length(siblings)
+sdev / sqrt(n - 1) 
+
+# 自作関数
+
+se = function(x) {
+  sdev = sd(x)
+  n = length(x)
+  sdev / sqrt(n - 1)
+}
+
+se
+
+se(siblings)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
