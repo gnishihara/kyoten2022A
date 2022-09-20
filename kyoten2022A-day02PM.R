@@ -168,21 +168,28 @@ install.packages("magick")
 library(showtext)
 library(magick)
 
-#! eval: false
-font_files() |> as_tibble()
-
-
-font_files() |> as_tibble() |> 
+################################################################
+# 日本語フォントの準備
+ 
+font_files() |> as_tibble() # システムフォントの閲覧
+font_files() |> as_tibble() |>
   filter(str_detect(ps_name, "NotoSansCJK")) |> 
   select(file, face, ps_name) 
 
+# 埋め込みフォントの指定
 font_add(family = "notosansjp",
          regular = "NotoSansCJKjp-Regular.otf")
 
-theme_gray(base_family = "notosansjp") |> 
-  theme_set()
+# フォントを有効にする
+theme_gray(base_family = "notosansjp") |> theme_set()
 
+# Windows の場合
+# font_add(family = "meiryo", regular = "meiryo.ttc")
+# theme_gray(base_family = "meiryo") |> theme_set()
 showtext_auto()
+################################################################
+
+
 
 ggplot(dset_summary) + 
   geom_point(aes(x = pressure,
