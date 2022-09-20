@@ -6,7 +6,7 @@
 # （１）サイコロの目の数を８にして、２つのサイコロの和をとる。回数の1000回。
 # （２）（１）のヒストグラムを示す。
 
-n = 1:8
+n = 1:8 # ここでサウコロの目を決める
 sum_value = rep(0, times = 1000)
 for(i in 1:1000) {
   value = sample(x = n, size = 2, replace = TRUE)
@@ -23,10 +23,10 @@ barplot(height = dicerolls$Freq,
 # （３）サイコロの目の数を6にして、３つのサイコロの和をとる。回数の1000回。
 # （４）（１）のヒストグラムを示す。
 
-n = 1:6
+n = 1:6 # ここでサウコロの目を決める
 sum_value = rep(0, times = 1000)
 for(i in 1:1000) {
-  value = sample(x = n, size = 3, replace = TRUE)
+  value = sample(x = n, size = 3, replace = TRUE) # size = 3 に設定すると一度に投げる数をきめる。
   sum_value[i] = sum(value)
 }
 sum_value
