@@ -157,6 +157,5 @@ dicerolls = as.data.frame(dicerolls)
 barplot(height = dicerolls$Freq,
         names.arg = dicerolls$sum_value)
 
-# tidyverse の紹介
 
  

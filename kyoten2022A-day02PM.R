@@ -2,8 +2,7 @@
 # 2022 September 20 PM
 # Greg Nishihara
 
-
-
+# tidyverse の紹介
 # データの読み方
 
 # データの操作
