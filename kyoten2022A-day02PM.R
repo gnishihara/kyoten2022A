@@ -179,9 +179,10 @@ font_files() |> as_tibble() |>
 font_add(family = "notosansjp",
          regular = "NotoSansCJKjp-Regular.otf")
 
+theme_gray(base_family = "notosansjp") |> 
+  theme_set()
 
-
-
+showtext_auto()
 
 ggplot(dset_summary) + 
   geom_point(aes(x = pressure,
