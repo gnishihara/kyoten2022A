@@ -184,12 +184,10 @@ font_add(family = "notosansjp",
 theme_gray(base_family = "notosansjp") |> theme_set()
 
 # Windows の場合
-# font_add(family = "meiryo", regular = "meiryo.ttc")
-# theme_gray(base_family = "meiryo") |> theme_set()
+font_add(family = "meiryo", regular = "meiryo.ttc")
+theme_gray(base_family = "meiryo") |> theme_set()
 showtext_auto()
 ################################################################
-
-
 
 ggplot(dset_summary) + 
   geom_point(aes(x = pressure,
@@ -205,9 +203,12 @@ ggsave("mbar-wind.pdf", width = 80, height = 80, units = "mm")
 
 
 
+pdfname = "greg-mbar-wind.pdf"
+pngname = "greg-mbar-wind.png"
 
-
-
+library(magick)
+img = image_read_pdf(pdfname, density = 600)
+image_write(img, path = pngname)
 
 
 
