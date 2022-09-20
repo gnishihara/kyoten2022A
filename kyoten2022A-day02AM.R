@@ -84,7 +84,79 @@ c(1, 1, 0) * c(0, 1, 0)
 
 
 # R関数の作り方（サイコロ）
+# 6目サイコロ
 
+n = 1:6 # c(1, 2, 3, 4, 5, 6)
+
+# 重複ありサンプリング
+sample(x = n, size = 3, replace = TRUE)
+
+# 重複なしサンプリング
+sample(x = n, size = 3)
+
+# ２つのサイコロの和
+value = sample(x = n, size = 2, replace = TRUE)
+sum(value) # サイコロの和
+value
+
+
+## for-loop.
+
+j = 0
+for(i in 1:50) {
+  print(i)
+  j = j + i 
+  print(j)
+}
+
+
+value01 = sample(x = n, size = 2, replace = TRUE)
+sum_value01 = sum(value01)
+
+value02 = sample(x = n, size = 2, replace = TRUE)
+sum_value02 = sum(value02)
+
+value03 = sample(x = n, size = 2, replace = TRUE)
+sum_value03 = sum(value03)
+
+value04 = sample(x = n, size = 2, replace = TRUE)
+sum_value04 = sum(value04)
+
+value05 = sample(x = n, size = 2, replace = TRUE)
+sum_value05 = sum(value05)
+
+c(sum_value01, sum_value02, sum_value03, 
+  sum_value04, sum_value05)
+
+sum_value = c(0, 0, 0, 0, 0)
+for(i in 1:5) {
+  value = sample(x = n, size = 2, replace = TRUE)
+  sum_value[i] = sum(value)
+  print(sum_value)
+}
+sum_value
+
+# ２つのサイコロを 1000 投げて、和をとる
+
+sum_value = rep(0, times = 1000)
+for(i in 1:1000) {
+  value = sample(x = n, size = 2, replace = TRUE)
+  sum_value[i] = sum(value)
+  print(sum_value)
+}
+sum_value
+
+mean(sum_value)
+sd(sum_value)
+median(sum_value)
+
+table(sum_value)
+
+dicerolls = table(sum_value)
+dicerolls = as.data.frame(dicerolls)
+
+barplot(height = dicerolls$Freq,
+        names.arg = dicerolls$sum_value)
 
 # tidyverse の紹介
 
