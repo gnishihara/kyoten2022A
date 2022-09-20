@@ -173,8 +173,10 @@ barplot(height = unitab$Freq,
         names.arg = unitab$university)
 
 
-
-
+x = c(10, 10, 20, 30, 40)
+x[3]
+x[1]
+mean(x = c(10, 10, 20, 20))
 
 
 
