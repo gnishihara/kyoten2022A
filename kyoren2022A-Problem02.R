@@ -165,10 +165,6 @@ ggplot(dset_summary) +
 ggsave("greg-wind-gust.pdf", width = 80, height = 80, units = "mm")
 
 
-library(patchwork)
-p1 + p2
-
-
 
 
 dset %>% group_by(day)%>% filter(length(day))<(6*24)%>%  print(n=300) 
