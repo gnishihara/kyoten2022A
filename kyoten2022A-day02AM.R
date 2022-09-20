@@ -137,7 +137,6 @@ for(i in 1:5) {
 sum_value
 
 # ２つのサイコロを 1000 投げて、和をとる
-
 sum_value = rep(0, times = 1000)
 for(i in 1:1000) {
   value = sample(x = n, size = 2, replace = TRUE)
