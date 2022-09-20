@@ -13,12 +13,15 @@ find_length = 5.0 # 検索する・フィルターにかける長さ
 iris$Sepal.Length > find_length   # よりおおきい
 iris$Sepal.Length >= find_length  # 以上
 
+
 # 等しい, えらーおこしやすいので、
 iris$Sepal.Length == find_length
 1/3 == 0.3333333333333333
 
 # dplyr　パッケージの near() 関数を使う。
-dplyr::near(1/3, 0.33, tol = 0.01)
+dplyr::near(1/3, 0.33, tol = 0.01) # dplyr の関数
+all.equal(1/3, 0.33) # Base R の関数
+
 iris$Sepal.Length <= find_length
 iris$Sepal.Length != find_length
 
