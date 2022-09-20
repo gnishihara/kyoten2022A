@@ -36,3 +36,6 @@ dicerolls = as.data.frame(dicerolls)
 
 barplot(height = dicerolls$Freq,
         names.arg = dicerolls$sum_value)
+
+
+## apply() 関数の使い方
