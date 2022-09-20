@@ -111,12 +111,8 @@ ggplot(dset_summary) +
                      limits = c(0, 8))
 
 
-ggsave("mbar-wind.pdf", width = 80, height = 80, units = "mm")
+ggsave("greg-mbar-wind.pdf", width = 80, height = 80, units = "mm")
 
 
 # 問題：par ~ pressure, wind ~ gust の図をつくる。
-# ファイル名： "namae-par-wind.pdf" か "namae-wind-gust.pdf"
-
-
-
-
+# ファイル名： "namae-par-pressure.pdf" か "namae-wind-gust.pdf"
