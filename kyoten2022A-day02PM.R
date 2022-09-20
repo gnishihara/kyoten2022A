@@ -148,6 +148,57 @@ ggplot(dset_summary) +
                  y = wind))
 
 
+ggplot(dset_summary) + 
+  geom_point(aes(x = pressure,
+                 y = wind)) +
+  scale_x_continuous(name = "平均気圧 (mbar)",
+                     breaks = c(990, 1000, 1010, 1020, 1030, 1040),
+                     limits = c(990, 1040)) +
+  scale_y_continuous(name = "平均風速 (m / s)",
+                     breaks = seq(0, 8, by = 2),
+                     limits = c(0, 8))
+
+
+ggsave("mbar-wind.pdf", width = 80, height = 80, units = "mm")
+
+# オプションパッケージのインストール
+install.packages("showtext")
+install.packages("magick")
+
+library(showtext)
+library(magick)
+
+#! eval: false
+font_files() |> as_tibble()
+
+
+font_files() |> as_tibble() |> 
+  filter(str_detect(ps_name, "NotoSansCJK")) |> 
+  select(file, face, ps_name) 
+
+font_add(family = "notosansjp",
+         regular = "NotoSansCJKjp-Regular.otf")
+
+
+
+
+
+ggplot(dset_summary) + 
+  geom_point(aes(x = pressure,
+                 y = wind)) +
+  scale_x_continuous(name = "平均気圧 (mbar)",
+                     breaks = c(990, 1000, 1010, 1020, 1030, 1040),
+                     limits = c(990, 1040)) +
+  scale_y_continuous(name = "平均風速 (m / s)",
+                     breaks = seq(0, 8, by = 2),
+                     limits = c(0, 8))
+
+
+ggsave("mbar-wind.pdf", width = 80, height = 80, units = "mm")
+
+
+
+
 
 
 
