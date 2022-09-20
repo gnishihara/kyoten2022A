@@ -1,11 +1,12 @@
 # 公開臨海データ解析実習　A日程
-# 2022 September 20 PM
+# 2022 September 20 AM: 課題2
 # Greg Nishihara
+
 
 # tidyverse の紹介
 library(tidyverse)
 library(lubridate)
- 
+
 # コンマ区切りファイルの読み込み関数
 # read.csv() # base R　関数
 read_csv() # tidyverse (readr) 関数
@@ -32,12 +33,12 @@ ds1 # tidyverse の data frame は　tibble
 # matches() は正規表現で変数名を探します
 
 ds1 = rename(ds1, 
-       n = `#`,
-       datetime = `日付 時間, GMT+09:00`,
-       par = matches("PAR"),
-       wind = matches("風速"),
-       gust = matches("突風"),
-       pressure = matches("mbar"))
+             n = `#`,
+             datetime = `日付 時間, GMT+09:00`,
+             par = matches("PAR"),
+             wind = matches("風速"),
+             gust = matches("突風"),
+             pressure = matches("mbar"))
 
 ds2 = rename(ds2, 
              n = `#`,
@@ -88,7 +89,7 @@ ds6 |> tail()
 
 ds6 |> slice(1:12) |> tail() # パイプにの連結
 tail(slice(ds6, 1:12))       # 関数のネスティング
-  
+
 sample(1:6, size =  3) |> mean()
 
 # 複数データの結合
@@ -102,11 +103,11 @@ dset = bind_rows(ds1, ds2, ds3, ds4, ds5, ds6)
 # 時間データを文字列から時間データへ変換する
 dset = dset |> 
   mutate(datetime = parse_date_time(datetime,
-                              orders = "mdyT"))
+                                    orders = "mdyT"))
 # 時間データの切り捨て処理
 dset = dset |> 
   mutate(datetime = floor_date(datetime, 
-                              unit = "minutes"))
+                               unit = "minutes"))
 
 # 一日におけるデータ数
 6 * 24
@@ -134,79 +135,4 @@ dset_summary = dset |>
             gust = mean(gust),
             par  = mean(par),
             pressure = mean(pressure))
-
-
-# 作図
-
-
-ggplot(dset_summary) + 
-  geom_point(aes(x = day,
-                 y = pressure))
-
-ggplot(dset_summary) + 
-  geom_point(aes(x = pressure,
-                 y = wind))
-
-
-ggplot(dset_summary) + 
-  geom_point(aes(x = pressure,
-                 y = wind)) +
-  scale_x_continuous(name = "平均気圧 (mbar)",
-                     breaks = c(990, 1000, 1010, 1020, 1030, 1040),
-                     limits = c(990, 1040)) +
-  scale_y_continuous(name = "平均風速 (m / s)",
-                     breaks = seq(0, 8, by = 2),
-                     limits = c(0, 8))
-
-
-ggsave("mbar-wind.pdf", width = 80, height = 80, units = "mm")
-
-# オプションパッケージのインストール
-install.packages("showtext")
-install.packages("magick")
-
-library(showtext)
-library(magick)
-
-#! eval: false
-font_files() |> as_tibble()
-
-
-font_files() |> as_tibble() |> 
-  filter(str_detect(ps_name, "NotoSansCJK")) |> 
-  select(file, face, ps_name) 
-
-font_add(family = "notosansjp",
-         regular = "NotoSansCJKjp-Regular.otf")
-
-theme_gray(base_family = "notosansjp") |> 
-  theme_set()
-
-showtext_auto()
-
-ggplot(dset_summary) + 
-  geom_point(aes(x = pressure,
-                 y = wind)) +
-  scale_x_continuous(name = "平均気圧 (mbar)",
-                     breaks = c(990, 1000, 1010, 1020, 1030, 1040),
-                     limits = c(990, 1040)) +
-  scale_y_continuous(name = "平均風速 (m / s)",
-                     breaks = seq(0, 8, by = 2),
-                     limits = c(0, 8))
-
-ggsave("mbar-wind.pdf", width = 80, height = 80, units = "mm")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
