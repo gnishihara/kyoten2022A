@@ -51,7 +51,37 @@ iris$Petal.Length[logical02]
 # 5 >= Petal.Length >= 6
 iris$Petal.Length[logical01 & logical02] 
 iris$Petal.Length[iris$Petal.Length >= 5 & iris$Petal.Length <= 6] 
- 
+
+# 5 >= Petal.Length >= 6 または species == setosa
+iris$Petal.Length[(logical01 & logical02) | iris$Species == "setosa"] 
+
+# データフレームを返す方法
+# 検索の条件
+
+logical01 = iris$Sepal.Length > 5
+logical02 = iris$Sepal.Width  > 3
+
+iris[logical01, ] # Sepal.Length > 5
+iris[logical02, ] # Sepal.Width > 3
+
+# Sepal.Length > 5 & Sepal.Width > 3
+iris[logical01 & logical02, ] 
+
+# 1行目
+#[行 , 列]
+iris[1, ]
+
+# 1行目,2から３列め
+iris[1, c(2, 3)]
+
+
+# 論理ベクトルのかけざん
+# TRUE: 1
+# FALSE: 0
+c(TRUE, TRUE, FALSE) * c(FALSE, TRUE, FALSE)
+c(TRUE, TRUE, FALSE) & c(FALSE, TRUE, FALSE)
+c(1, 1, 0) * c(0, 1, 0)
+
 
 # R関数の作り方（サイコロ）
 
