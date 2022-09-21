@@ -373,6 +373,55 @@ ggsave(filename = pdfname,
 
 
 
+# 
+# x-軸ラベルの工夫
+
+dsetlm2 = dsetlm |> 
+  mutate(station = factor(
+    station,
+    levels = c("Control", "Canopy edge", 
+               "Canopy interior", "Sand")
+  )) |> 
+  mutate(nutrient = factor(
+    nutrient,
+    levels = c("PO4", "NO23", "NH4")
+  ))
+
+ylabel = "Concentration~(mg~L^{-1})"
+ggplot() + 
+  geom_point(aes(x = station,
+                 y = m,
+                 color = nutrient),
+             data = dsetlm2,
+             position = position_dodge(width = 0.3)) +
+  geom_errorbar(aes(x = station,
+                    ymin = m - e,
+                    ymax = m + e,
+                    color = nutrient),
+                data = dsetlm2,
+                position = position_dodge(width = 0.3),
+                width = 0.1) +
+  scale_color_viridis_d(name = "", 
+                        end = 0.8) + 
+  scale_x_discrete("Station") +
+  scale_y_continuous(name = parse(text = ylabel),
+                     limits = c(0, 0.4)) +
+  theme(legend.position = c(1,0),
+        legend.justification = c(1,0),
+        legend.direction = "horizontal",
+        legend.background = element_blank())
+
+
+
+pdfname = "greg-nutrients-m-e.pdf"
+ggsave(filename = pdfname,
+       width = 2*80, 
+       height = 80,
+       units = "mm")
+
+
+
+
 
 
 
