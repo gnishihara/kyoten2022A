@@ -29,14 +29,33 @@ theme_gray(base_family = "notosansjp") |> theme_set()
 showtext_auto()
 ################################################################
 # このリンクからCSVファイルをDLする。
-url = "https://drive.google.com/file/d/1p6uR6YdlUBQFh3IotRMwnqHT_LYPk0PJ/view?usp=sharing"
 
-download.file(url, destfile = "./hatatadataset.csv")
+# url = "https://drive.google.com/file/d/1p6uR6YdlUBQFh3IotRMwnqHT_LYPk0PJ&export=download"
+# ファイルのダウンロード
+#download.file(url, destfile = "./hatatadataset.csv")
+
+################################################################################
 
 
+dset = read_csv("data/hatatadataset.csv")
+names(dset)
+dset
 
+# 箱ひげ図
 
+ggplot(dset) + 
+  geom_boxplot(aes(x = station, y = PO4))
 
+# 散布図
+ 
+# dset が下流の関数のデフォルトデータ
+ggplot(dset) + 
+  geom_point(aes(x = station, y = PO4))
+
+# 関数ごとにデータを指定する
+ggplot() + 
+  geom_point(aes(x = station, y = PO4),
+             data = dset)
 
 
 
