@@ -102,13 +102,16 @@ ggplot() +
                      limits = c(0, 0.4),
                      breaks = seq(0, 0.4, by = 0.1))
 
-
+#
+# ?pch を実行して、記号の説明を確認する
+# viridis: 色弱に対応している色
 
 ylabel = "PO[4]~(mg~L^{-1})"
 ggplot() + 
-  geom_point(aes(x = station, y = PO4,
+  geom_point(aes(x = station, 
+                 y = PO4,
                  shape = station,
-                 color = station),
+                 fill = station),
              data = dset,
              position = position_jitter(width = 0.05,
                                         height = 0),
@@ -117,7 +120,17 @@ ggplot() +
   scale_x_discrete(name = "Station") +
   scale_y_continuous(name = parse(text = ylabel),
                      limits = c(0, 0.4),
-                     breaks = seq(0, 0.4, by = 0.1))
+                     breaks = seq(0, 0.4, by = 0.1)) +
+  scale_shape_manual(name = "",
+                       values = c(21, 22, 23, 24)) +
+  scale_fill_viridis_d(name = "") +
+  theme(legend.position = c(1.0,1.0),
+        legend.justification = c(1,1),
+        legend.background = element_blank(),
+        axis.line = element_line(color = "red",
+                                 size = 3, 
+                                 linetype = "solid",
+                                 lineend = "square"))
 
 
 
