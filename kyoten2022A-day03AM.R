@@ -24,8 +24,32 @@ font_add(family = "notosansjp",
 theme_gray(base_family = "notosansjp") |> theme_set()
 
 # Windows の場合
-font_add(family = "meiryo", regular = "meiryo.ttc")
-theme_gray(base_family = "meiryo") |> theme_set()
+# font_add(family = "meiryo", regular = "meiryo.ttc")
+# theme_gray(base_family = "meiryo") |> theme_set()
 showtext_auto()
 ################################################################
+# このリンクからCSVファイルをDLする。
+url = "https://drive.google.com/file/d/1p6uR6YdlUBQFh3IotRMwnqHT_LYPk0PJ/view?usp=sharing"
+
+download.file(url, destfile = "./hatatadataset.csv")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
