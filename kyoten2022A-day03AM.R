@@ -177,6 +177,7 @@ ggplot() +
 
 
 # ggplot の annotation
+# タイトルの追加
 
 ylabel = "PO[4]~(mg~L^{-1})"
 text1 = "Mean and one standard deviation."
@@ -193,11 +194,16 @@ ggplot() +
   geom_text(aes(x = station,
                 y = m + s + 0.01,
                 label = sprintf("n = %d", n_no_na)),
-            data = dsetm) + 
+            data = dsetm,
+            family = "notosansjp") + 
   annotate("text",
            x = 1,
-           y = 0.05,
-           label = text1) + 
+           y = 0.0,
+           label = text1,
+           hjust = 0,
+           vjust = 0,
+           family = "notosansjp") + 
+  labs(title = "greg") +
   scale_x_discrete(name = "Station") +
   scale_y_continuous(name = parse(text = ylabel),
                      limits = c(0, 0.3),
@@ -206,7 +212,10 @@ ggplot() +
         legend.justification = c(1,1),
         legend.background = element_blank())
 
-
-
+pdfname = "greg-po4-m-s.pdf"
+ggsave(filename = pdfname,
+       width = 2*80, 
+       height = 80,
+       units = "mm")
 
 
