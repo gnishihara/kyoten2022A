@@ -266,3 +266,118 @@ ggsave(filename = pdfname,
        width = 2*80, 
        height = 80,
        units = "mm")
+
+
+
+
+# 全データの解析
+
+se = function(x, na.rm = TRUE) {
+  s = sd(x, na.rm)
+  n = sum(!is.na(x))
+  s / sqrt(n - 1)
+}
+
+dsetm = dset |> 
+  group_by(station) |> 
+  summarise(
+    across(c(NO23, PO4, NH4),
+           list(m = ~mean(.x, na.rm = TRUE),
+                s = ~sd(.x, na.rm = TRUE),
+                e = se))
+  )
+
+dsetl = dsetm |> 
+  pivot_longer(cols = c(
+    NO23_m, NO23_s, NO23_e,
+    PO4_m, PO4_s, PO4_e,
+    NH4_m, NH4_s, NH4_e
+  ))
+
+
+dsetl = dsetl |> 
+  separate(name, into = c("nutrient", "statistic"))
+
+dsetlm = dsetl |> 
+  pivot_wider(names_from = statistic,
+              values_from = value)
+
+ylabel = "Concentration~(mg~L^{-1})"
+ggplot() + 
+  geom_point(aes(x = station,
+                 y = m,
+                 color = nutrient),
+             data = dsetlm,
+             position = position_dodge(width = 0.3)) +
+  geom_errorbar(aes(x = station,
+                    ymin = m - e,
+                    ymax = m + e,
+                    color = nutrient),
+                data = dsetlm,
+                position = position_dodge(width = 0.3),
+                width = 0.1) +
+  scale_color_viridis_d(name = "", 
+                        end = 0.8) + 
+  scale_x_discrete("Station") +
+  scale_y_continuous(name = parse(text = ylabel)) +
+  theme(legend.position = c(1,0),
+        legend.justification = c(1,0),
+        legend.direction = "horizontal",
+        legend.background = element_blank())
+
+
+
+pdfname = "greg-nutrients-m-e.pdf"
+ggsave(filename = pdfname,
+       width = 2*80, 
+       height = 80,
+       units = "mm")
+
+
+
+library(ggpubr)
+theme_pubr(base_family = "notosansjp") |> theme_set()
+
+ylabel = "Concentration~(mg~L^{-1})"
+ggplot() + 
+  geom_point(aes(x = station,
+                 y = m,
+                 color = nutrient),
+             data = dsetlm,
+             position = position_dodge(width = 0.3)) +
+  geom_errorbar(aes(x = station,
+                    ymin = m - e,
+                    ymax = m + e,
+                    color = nutrient),
+                data = dsetlm,
+                position = position_dodge(width = 0.3),
+                width = 0.1) +
+  scale_color_viridis_d(name = "", 
+                        end = 0.8) + 
+  scale_x_discrete("Station") +
+  scale_y_continuous(name = parse(text = ylabel),
+                     limits = c(0, 0.4)) +
+  theme(legend.position = c(1,0),
+        legend.justification = c(1,0),
+        legend.direction = "horizontal",
+        legend.background = element_blank())
+
+
+
+pdfname = "greg-nutrients-m-e.pdf"
+ggsave(filename = pdfname,
+       width = 2*80, 
+       height = 80,
+       units = "mm")
+
+
+
+
+
+
+
+
+
+
+
+
