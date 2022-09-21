@@ -156,18 +156,55 @@ sum(is.na(c(T, F, T, F, NA, NA)))
 sum(!is.na(c(T, F, T, F, NA, NA)))
 
 
-
+ylabel = "PO[4]~(mg~L^{-1})"
 ggplot() +
   geom_point(aes(x = station, 
                  y = m),
-             data = dsetm) +
+             data = dsetm,
+             size = 3) +
   geom_errorbar(aes(x = station,
                     ymin = m - s,
                     ymax = m + s),
                 data = dsetm,
-                width = 0.2)
+                width = 0.05) +
+  scale_x_discrete(name = "Station") +
+  scale_y_continuous(name = parse(text = ylabel),
+                     limits = c(0, 0.3),
+                     breaks = seq(0, 0.3, by = 0.1)) +
+    theme(legend.position = c(1.0,1.0),
+        legend.justification = c(1,1),
+        legend.background = element_blank())
 
 
+# ggplot の annotation
+
+ylabel = "PO[4]~(mg~L^{-1})"
+text1 = "Mean and one standard deviation."
+ggplot() +
+  geom_point(aes(x = station, 
+                 y = m),
+             data = dsetm,
+             size = 3) +
+  geom_errorbar(aes(x = station,
+                    ymin = m - s,
+                    ymax = m + s),
+                data = dsetm,
+                width = 0.05) +
+  geom_text(aes(x = station,
+                y = m + s + 0.01,
+                label = sprintf("n = %d", n_no_na)),
+            data = dsetm) + 
+  annotate("text",
+           x = 1,
+           y = 0.05,
+           label = text1) + 
+  scale_x_discrete(name = "Station") +
+  scale_y_continuous(name = parse(text = ylabel),
+                     limits = c(0, 0.3),
+                     breaks = seq(0, 0.3, by = 0.1)) +
+  theme(legend.position = c(1.0,1.0),
+        legend.justification = c(1,1),
+        legend.background = element_blank())
 
 
 
