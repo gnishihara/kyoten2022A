@@ -132,16 +132,40 @@ ggplot() +
                                  linetype = "solid",
                                  lineend = "square"))
 
+######################################################
+
+# 平均値と標準偏差の図
+# パイプは CTRL + SHIFT + M
+dset |> 
+  select(station, PO4) |> 
+  print(n = 200)
+
+dsetm = dset |> 
+  group_by(station) |> 
+  summarise(m = mean(PO4, na.rm = TRUE),
+            s = sd(PO4, na.rm = TRUE),
+            n_with_na = length(PO4),
+            n_no_na   = sum(!is.na(PO4)))
+
+
+c(T, F, T, F, NA)
+is.na(c(T, F, T, F, NA))
+sum(is.na(c(T, F, T, F, NA)))
+sum(is.na(c(T, F, T, F, NA, NA)))
+(!is.na(c(T, F, T, F, NA, NA)))
+sum(!is.na(c(T, F, T, F, NA, NA)))
 
 
 
-
-
-
-
-
-
-
+ggplot() +
+  geom_point(aes(x = station, 
+                 y = m),
+             data = dsetm) +
+  geom_errorbar(aes(x = station,
+                    ymin = m - s,
+                    ymax = m + s),
+                data = dsetm,
+                width = 0.2)
 
 
 
