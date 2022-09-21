@@ -77,11 +77,47 @@ ggplot() +
              alpha = 0.5,
              size = 5) + 
   scale_x_discrete(name = "Station") +
-  scale_y_continuous(name = "リン酸塩",
+  scale_y_continuous(name = "リン酸塩 (mg / L)",
                      limits = c(0, 0.4),
                      breaks = seq(0, 0.4, by = 0.1))
   
 
+# 軸タイトルの詳細設定
+# PO[4] : ４を下つけ
+# ^{-1} : -1 を上つけ
+# ~ : 半角スペース
+# 
+ylabel = "PO[4]~(mg~L^{-1})"
+ggplot() + 
+  geom_point(aes(x = station, y = PO4,
+                 shape = station,
+                 color = station),
+             data = dset,
+             position = position_jitter(width = 0.05,
+                                        height = 0),
+             alpha = 0.5,
+             size = 5) + 
+  scale_x_discrete(name = "Station") +
+  scale_y_continuous(name = parse(text = ylabel),
+                     limits = c(0, 0.4),
+                     breaks = seq(0, 0.4, by = 0.1))
+
+
+
+ylabel = "PO[4]~(mg~L^{-1})"
+ggplot() + 
+  geom_point(aes(x = station, y = PO4,
+                 shape = station,
+                 color = station),
+             data = dset,
+             position = position_jitter(width = 0.05,
+                                        height = 0),
+             alpha = 0.5,
+             size = 5) + 
+  scale_x_discrete(name = "Station") +
+  scale_y_continuous(name = parse(text = ylabel),
+                     limits = c(0, 0.4),
+                     breaks = seq(0, 0.4, by = 0.1))
 
 
 
