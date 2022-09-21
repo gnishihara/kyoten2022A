@@ -64,13 +64,23 @@ ggplot() +
              alpha = 0.5,
              size = 5)
 
+# shape: 記号の形を変える
+# color: 記号の色を変える
+
 ggplot() + 
-  geom_point(aes(x = station, y = PO4),
+  geom_point(aes(x = station, y = PO4,
+                 shape = station,
+                 color = station),
              data = dset,
              position = position_jitter(width = 0.05,
                                         height = 0),
              alpha = 0.5,
-             size = 5)
+             size = 5) + 
+  scale_x_discrete(name = "Station") +
+  scale_y_continuous(name = "リン酸塩",
+                     limits = c(0, 0.4),
+                     breaks = seq(0, 0.4, by = 0.1))
+  
 
 
 
