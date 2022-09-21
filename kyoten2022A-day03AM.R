@@ -53,9 +53,27 @@ ggplot(dset) +
   geom_point(aes(x = station, y = PO4))
 
 # 関数ごとにデータを指定する
+# position: 点の場所
+# alpha: 透明度
+# size : 記号の大きさ
 ggplot() + 
   geom_point(aes(x = station, y = PO4),
-             data = dset)
+             data = dset,
+             position = position_jitter(width = 0.05,
+                                        height = 0),
+             alpha = 0.5,
+             size = 5)
+
+ggplot() + 
+  geom_point(aes(x = station, y = PO4),
+             data = dset,
+             position = position_jitter(width = 0.05,
+                                        height = 0),
+             alpha = 0.5,
+             size = 5)
+
+
+
 
 
 
